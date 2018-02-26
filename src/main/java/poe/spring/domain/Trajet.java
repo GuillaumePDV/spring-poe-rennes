@@ -8,7 +8,7 @@ public class Trajet {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    public String villeDepart;
+    private String villeDepart;
     private String villeArrivee;
     private Date dateDepart; // précision à la minute
     private Integer prix;
