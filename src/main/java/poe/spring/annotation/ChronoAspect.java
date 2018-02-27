@@ -32,9 +32,7 @@ public class ChronoAspect {
 		long start = System.currentTimeMillis();
 		Object proceed = joinPoint.proceed();
 		long executionTime = System.currentTimeMillis() - start;
-//		System.out.println(joinPoint.getSignature() + " executed in " + executionTime + "ms");
-		logger.debug(joinPoint.getSignature() + " executed in " + executionTime + "ms");
-
+		logger.debug(String.format("%s executed class in %s ms", joinPoint.getSignature(), executionTime));
 		return proceed;
 	}
 
@@ -43,8 +41,6 @@ public class ChronoAspect {
 		long start = System.currentTimeMillis();
 		Object proceed = joinPoint.proceed();
 		long executionTime = System.currentTimeMillis() - start;
-//		System.out.println(joinPoint.getSignature() + " executed class in " + executionTime + "ms");
-//		logger.debug(joinPoint.getSignature() + " executed class in " + executionTime + "ms");
 		logger.debug(String.format("%s executed class in %s ms", joinPoint.getSignature(), executionTime));
 		return proceed;
 	}
