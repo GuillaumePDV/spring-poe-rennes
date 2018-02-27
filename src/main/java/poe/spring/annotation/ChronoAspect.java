@@ -1,16 +1,27 @@
 package poe.spring.annotation;
 
-import java.util.logging.*;
+//import java.util.logging.*;
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+//import ch.qos.logback.classic.Logger;
 
 @Aspect
 @Component
 public class ChronoAspect {
+	
+	@Autowired
+	Logger logger;
+	
 
 	@Pointcut("execution(public * *(..))")
 	public void publicMethod() {
@@ -21,7 +32,8 @@ public class ChronoAspect {
 		long start = System.currentTimeMillis();
 		Object proceed = joinPoint.proceed();
 		long executionTime = System.currentTimeMillis() - start;
-		System.out.println(joinPoint.getSignature() + " executed in " + executionTime + "ms");
+//		System.out.println(joinPoint.getSignature() + " executed in " + executionTime + "ms");
+		logger.debug(joinPoint.getSignature() + " executed in " + executionTime + "ms");
 
 		return proceed;
 	}
@@ -31,20 +43,14 @@ public class ChronoAspect {
 		long start = System.currentTimeMillis();
 		Object proceed = joinPoint.proceed();
 		long executionTime = System.currentTimeMillis() - start;
-		System.out.println(joinPoint.getSignature() + " executed class in " + executionTime + "ms");
+//		System.out.println(joinPoint.getSignature() + " executed class in " + executionTime + "ms");
+		logger.debug(joinPoint.getSignature() + " executed class in " + executionTime + "ms");
 		return proceed;
 	}
 
-	// Logger
-	// logger=Logger.getLogger(".springboot.src.main.java.poe.spring.annotation.ChronoAspect.java");
-	// protected static Logger logger=
-	// Logger.getLogger("myPackage.mySubPackage.myClasse");
-	protected void logg(String s) {
-		Logger logger = Logger.getLogger(".springboot.src.main.java.poe.spring.annotation.ChronoAspect.java");
-		/*
-		 * http://cyberzoide.developpez.com/tutoriels/java/logging/
-		 * */
-//		Handler fh = newFileHandler("ChronoAspect.log");
-//		logger.addHandler(fh);
-	}
+//	protected void logg(String s) {
+//		Logger logger = LoggerFactory.getLogger(".springboot.src.main.java.poe.spring.annotation.ChronoAspect.java");
+//	    logger.debug("Hello world.");
+//		
+//	}
 }
