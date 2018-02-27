@@ -15,9 +15,9 @@ public class ChronoAspect {
 	@Autowired
 	Logger logger;
 
-	@Pointcut("execution(public * *(..))")
-	public void publicMethod() {
-	}
+//	@Pointcut("execution(public * *(..))")
+//	public void publicMethod() {
+//	}
 
 	@Around("@annotation(poe.spring.annotation.Chrono)")
 	public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
