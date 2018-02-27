@@ -44,13 +44,8 @@ public class ChronoAspect {
 		Object proceed = joinPoint.proceed();
 		long executionTime = System.currentTimeMillis() - start;
 //		System.out.println(joinPoint.getSignature() + " executed class in " + executionTime + "ms");
-		logger.debug(joinPoint.getSignature() + " executed class in " + executionTime + "ms");
+//		logger.debug(joinPoint.getSignature() + " executed class in " + executionTime + "ms");
+		logger.debug(String.format("%s executed class in %s ms", joinPoint.getSignature(), executionTime));
 		return proceed;
 	}
-
-//	protected void logg(String s) {
-//		Logger logger = LoggerFactory.getLogger(".springboot.src.main.java.poe.spring.annotation.ChronoAspect.java");
-//	    logger.debug("Hello world.");
-//		
-//	}
 }
