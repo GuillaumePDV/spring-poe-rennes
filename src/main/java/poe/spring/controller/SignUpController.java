@@ -21,39 +21,41 @@ import poe.spring.service.UserManagerService;
 @Controller
 @RequestMapping("/signup")
 public class SignUpController {
-	
+
+	private static final String SIGNUP = "signup";
+
 	@Autowired
-    UserManagerService userManagerService;
+	UserManagerService userManagerService;
 
-    @GetMapping
-    public String index(LoginForm form) {
-        return "signup"; // affiche signup.html
-    }
+	@GetMapping
+	public String index(LoginForm form) {
+		return SIGNUP; // affiche signup.html
+	}
 
-    @PostMapping
-    public String save(@Valid LoginForm form, BindingResult bindingResult, RedirectAttributes attr,  Model model) {
-        System.out.println("login " + form.getLogin());
-        System.out.println("password " + form.getPassword());
-        if (bindingResult.hasErrors()) {
-        	System.out.println("aqwzsx");
-            return "signup";
-        }
-        try {
-            userManagerService.signup(form.getLogin(), form.getPassword());
-        } catch (DuplicateLoginBusinessException e) {
-            model.addAttribute("error", "Ce login est déjà utilisé!");
-            return "signup";
-        }
-        attr.addAttribute("login", form.getLogin());
-        return "redirect:/signup/success";
-//        userManagerService.signup(form.getLogin(), form.getPassword());
-//        attr.addAttribute("login", form.getLogin());
-//        return "redirect:/signup/success";
-    }
+	@PostMapping
+	public String save(@Valid LoginForm form, BindingResult bindingResult, RedirectAttributes attr, Model model) {
+		System.out.println("login " + form.getLogin());
+		System.out.println("password " + form.getPassword());
+		if (bindingResult.hasErrors()) {
+			System.out.println("aqwzsx");
+			return SIGNUP;
+		}
+		try {
+			userManagerService.signup(form.getLogin(), form.getPassword());
+		} catch (DuplicateLoginBusinessException e) {
+			model.addAttribute("error", "Ce login est déjà utilisé!");
+			return SIGNUP;
+		}
+		attr.addAttribute("login", form.getLogin());
+		return "redirect:/signup/success";
+		// userManagerService.signup(form.getLogin(), form.getPassword());
+		// attr.addAttribute("login", form.getLogin());
+		// return "redirect:/signup/success";
+	}
 
-    @GetMapping("/success")
-    public String success(@RequestParam("login") String login, Model model) {
-        model.addAttribute("login", login);
-        return "success"; // success.html
-    }
+	@GetMapping("/success")
+	public String success(@RequestParam("login") String login, Model model) {
+		model.addAttribute("login", login);
+		return "success"; // success.html
+	}
 }

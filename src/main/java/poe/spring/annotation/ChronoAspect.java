@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class ChronoAspect {
 
 
-	private static final Logger logger = LoggerFactory.getLogger(ChronoAspect.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ChronoAspect.class);
 
 	
 	@Around("@annotation(poe.spring.annotation.Chrono)")
@@ -21,6 +21,7 @@ public class ChronoAspect {
 		Object proceed = joinPoint.proceed();
 		long executionTime = System.currentTimeMillis() - start;
 		String logg = String.format("%s executed class in %s ms", joinPoint.getSignature(), executionTime);
+		LOGGER.debug(logg);
 		return proceed;
 	}
 
@@ -30,6 +31,7 @@ public class ChronoAspect {
 		Object proceed = joinPoint.proceed();
 		long executionTime = System.currentTimeMillis() - start;
 		String logg = String.format("%s executed class in %s ms", joinPoint.getSignature(), executionTime);
+		LOGGER.debug(logg);
 		return proceed;
 	}
 }
