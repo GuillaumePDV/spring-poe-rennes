@@ -1,27 +1,19 @@
 package poe.spring.annotation;
 
-//import java.util.logging.*;
-
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-//import ch.qos.logback.classic.Logger;
 
 @Aspect
 @Component
 public class ChronoAspect {
-	
+
 	@Autowired
 	Logger logger;
-	
 
 	@Pointcut("execution(public * *(..))")
 	public void publicMethod() {
@@ -32,7 +24,8 @@ public class ChronoAspect {
 		long start = System.currentTimeMillis();
 		Object proceed = joinPoint.proceed();
 		long executionTime = System.currentTimeMillis() - start;
-		logger.debug(String.format("%s executed class in %s ms", joinPoint.getSignature(), executionTime));
+		String logg = String.format("%s executed class in %s ms", joinPoint.getSignature(), executionTime);
+		logger.debug(logg);
 		return proceed;
 	}
 
@@ -41,7 +34,8 @@ public class ChronoAspect {
 		long start = System.currentTimeMillis();
 		Object proceed = joinPoint.proceed();
 		long executionTime = System.currentTimeMillis() - start;
-		logger.debug(String.format("%s executed class in %s ms", joinPoint.getSignature(), executionTime));
+		String logg = String.format("%s executed class in %s ms", joinPoint.getSignature(), executionTime);
+		logger.debug(logg);
 		return proceed;
 	}
 }
