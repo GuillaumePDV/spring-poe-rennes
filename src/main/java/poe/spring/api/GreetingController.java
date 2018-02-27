@@ -1,6 +1,7 @@
 package poe.spring.api;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,9 +13,9 @@ import poe.spring.domain.Greeting;
 @RestController
 public class GreetingController {
 	
-	@Autowired
-	Logger logger;
-
+	
+	private static final Logger logger = LoggerFactory.getLogger(GreetingController.class);
+	
 	@RequestMapping("/hello")
 	public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
 		String logg = String.format("hello here");
